@@ -32,8 +32,8 @@ public class Main : TranslatePluginBase
         LangEnum.ChineseSimplified => "Chinese", // 简体中文
         LangEnum.ChineseTraditional => "Traditional Chinese", // 繁体中文
         LangEnum.Cantonese => "Cantonese", // 粤语
-        LangEnum.English => "Japanese", // 日语
-        LangEnum.Japanese => "English", // 英语
+        LangEnum.English => "English", // 英语
+        LangEnum.Japanese => "Japanese", // 日语
         LangEnum.Korean => "Korean", // 韩语
         LangEnum.French => "French", // 法语
         LangEnum.Spanish => "Spanish", // 西班牙语
@@ -73,8 +73,8 @@ public class Main : TranslatePluginBase
         LangEnum.ChineseSimplified => "Chinese", // 简体中文
         LangEnum.ChineseTraditional => "Traditional Chinese", // 繁体中文
         LangEnum.Cantonese => "Cantonese", // 粤语
-        LangEnum.English => "Japanese", // 日语
-        LangEnum.Japanese => "English", // 英语
+        LangEnum.English => "English", // 英语
+        LangEnum.Japanese => "Japanese", // 日语
         LangEnum.Korean => "Korean", // 韩语
         LangEnum.French => "French", // 法语
         LangEnum.Spanish => "Spanish", // 西班牙语
