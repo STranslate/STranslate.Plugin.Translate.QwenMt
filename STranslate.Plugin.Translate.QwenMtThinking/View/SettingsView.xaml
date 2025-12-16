@@ -1,0 +1,96 @@
+<UserControl
+    x:Class="STranslate.Plugin.Translate.QwenMt.View.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:plugin="clr-namespace:STranslate.Plugin;assembly=STranslate.Plugin"
+    xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+    xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:vm="clr-namespace:STranslate.Plugin.Translate.QwenMt.ViewModel"
+    d:DataContext="{d:DesignInstance Type=vm:SettingsViewModel}"
+    mc:Ignorable="d">
+
+    <ikw:SimpleStackPanel Spacing="12">
+        
+        <ui:SettingsCard Header="API URL" Description="完整的 API 请求地址">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Link_20_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <TextBox MinWidth="300" Text="{Binding Url}" 
+                     ToolTip="请输入完整的接口地址，包含 /chat/completions" />
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Header="API Key" Description="输入 API 密钥">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Key_20_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <PasswordBox
+                MinWidth="300"
+                plugin:PasswordBoxAssistant.Attach="True"
+                plugin:PasswordBoxAssistant.Password="{Binding ApiKey}"
+                ui:ControlHelper.PlaceholderText="sk-..." />
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Header="Model" Description="输入或选择模型 ID">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon FontFamily="{StaticResource {x:Static ui:ThemeKeys.FluentSystemIconsKey}}" Glyph="&#xF0797;" />
+            </ui:SettingsCard.HeaderIcon>
+            <ComboBox
+                MinWidth="200"
+                IsEditable="True"
+                ItemsSource="{Binding Models}"
+                SelectedItem="{Binding Model, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="LostFocus">
+                        <i:InvokeCommandAction Command="{Binding AddModelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=Text}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding}" />
+                            <Button
+                                Grid.Column="1"
+                                Margin="4,0,0,0"
+                                Padding="4"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding DataContext.DeleteModelCommand, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                CommandParameter="{Binding}">
+                                <ui:FontIcon FontSize="{DynamicResource STControlFontSize12}" Foreground="{DynamicResource SystemFillColorCriticalBrush}" Icon="{x:Static ui:FluentSystemIcons.Delete_24_Regular}" />
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Header="深度思考" Description="显示模型的思考过程 (需模型支持)">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Lightbulb_24_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <ui:ToggleSwitch IsOn="{Binding IsThinkingEnabled}" />
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Header="显示思考过程" 
+                         Description="在翻译结果中显示模型的推理内容"
+                         IsEnabled="{Binding IsThinkingEnabled}">
+            <ui:SettingsCard.HeaderIcon>
+                <ui:FontIcon Icon="{x:Static ui:FluentSystemIcons.Eye_20_Regular}" />
+            </ui:SettingsCard.HeaderIcon>
+            <ui:ToggleSwitch IsOn="{Binding IsThinkingVisible}" />
+        </ui:SettingsCard>
+
+        <ui:SettingsCard Header="Help">
+            <ui:HyperlinkButton Content="查看如何获取 API Key" NavigateUri="https://cloud.siliconflow.cn/" />
+        </ui:SettingsCard>
+
+    </ikw:SimpleStackPanel>
+</UserControl>

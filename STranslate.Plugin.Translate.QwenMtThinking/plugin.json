@@ -1,0 +1,10 @@
+﻿{
+  "PluginID": "f9777015-b2b6-4941-bf04-6d3d609cb47d",
+  "Name": "AI",
+  "Description": "在原QwenMt插件下修改，支持开关深度思考，基于 Ark 接口",
+  "Author": "zggsong/hu",
+  "Version": "1.0.0",
+  "Website": "https://github.com/STranslate/STranslate.Plugin.Translate.QwenMt",
+  "ExecuteFileName": "STranslate.Plugin.Translate.QwenMt.dll",
+  "IconPath": "icon.png"
+}
